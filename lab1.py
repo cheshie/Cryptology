@@ -12,7 +12,6 @@ class MyAES:
         self.padlist    = []
         self.range_byte = [bytes([i]) for i in range(0, 255)]
     #
-
     # Encrypt message
     def encrypt(self):
         # Create encrypted string

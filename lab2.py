@@ -3,6 +3,7 @@ from itertools import accumulate
 from random import sample, choice
 from Crypto.Util import number
 from numpy import sum
+from timeit import timeit
 
 
 # Tests
@@ -16,7 +17,8 @@ class Secret():
         self.l_stronnictw = parties_nr
         self.prime_size = prime_size
         party = namedtuple("party", ["number", "shares", "k", "secret"])
-        self.parties  = [party(*params) for params in zip(range(1, parties_nr + 1), parties_share, k_shares, sample(range(number.getPrime(self.prime_size)), parties_nr))]
+        # range(number.getPrime(self.prime_size)
+        self.parties  = [party(*params) for params in zip(range(1, parties_nr + 1), parties_share, k_shares, sample(range(7337488745629403488410174275830423641502142554560856136484326749638755396267050319392266204256751706077766067020335998122952792559058552724477442839630133), parties_nr))]
         self.main_secret  = list(accumulate([x.secret for x in self.parties], lambda a, b: a ^ b))[-1]
         print("Glowny sekret: \n", self.main_secret)
     #
@@ -38,7 +40,6 @@ class Secret():
 
     # Secret sharing using Lagrange polynomials
     # More: https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing
-    # TODO: change lists to tuples
     def sss(self, S:'Secret'  = 11, n:'Number of shadows' = 5, k:'Number of shadows necessary to recover the secret' = 3,
                        p:'Prime modulo'=13, coeffs:'Coefficients of lagrange polynomial W(x) = coeff1, coeff2, ... , coeffn-1'=(7, 8)):
         # Check whether user passed proper number of coefficients to build lagrange polynomial

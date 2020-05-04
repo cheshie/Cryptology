@@ -17,9 +17,9 @@ class FIPS_TEST:
     def monobit(self, thresholds : "Default values for test"=(9725, 10275)):
         count_1  = self.sequence.count('1')
         if  count_1 > thresholds[0] and count_1 < thresholds[1]:
-            return True
+            return (True, count_1)
         else:
-            return False
+            return (False, count_1)
     #
     # Divide into 4-bit chunks
     # http://www.cmsim.eu/papers_pdf/april_2013_papers/4_CMSIM_Journal_2013_Min_Chen_Zang_2_273-280.pdf
@@ -33,7 +33,7 @@ class FIPS_TEST:
         # Calculate result of test
         X = (combinations / nr_of_chunks ) * sum([cnt ** 2 for ocur, cnt in counts]) - nr_of_chunks
         # return test value
-        return True if X > thresholds[0] and X < thresholds[1] else False
+        return (True, X) if X > thresholds[0] and X < thresholds[1] else (False, X)
     #
     # If there is a sequence of (or more) 26 same bits test fails
     def long_runs(self):
@@ -42,6 +42,6 @@ class FIPS_TEST:
         # sorted (ascending) list of lengths of these occurences
         occurences = sorted([len(x) for x in repeated])[-1]
         # return test value
-        return True if occurences < 26 else False
+        return (True, occurences) if occurences < 26 else (False, occurences)
     #
 #

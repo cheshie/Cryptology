@@ -166,7 +166,7 @@ class Window(QMainWindow):
         size_label = QLabel("Size")
         size_box   = QSpinBox()
         Window.registers[lid]['size-ref'] = size_box
-        size_box.setRange(1, 30)
+        size_box.setRange(1, 64)
         size_box.setValue(4)
         # Contents
         register_label = QLabel("Register contents")

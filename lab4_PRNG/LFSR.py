@@ -41,9 +41,6 @@ class Galois(LFSR):
 
 # Implements Fibonacci LFSR. On each iteration returns 0 or 1
 class Fibonacci(LFSR):
-    def __init__(self):
-        super().__init__()
-    #
     def __next__(self):
         bit = self.popcnt(self.st & self.tm)
         self.st  = (self.st >> 1) | (bit << (len(self.get_str(self.tm)) - 1))

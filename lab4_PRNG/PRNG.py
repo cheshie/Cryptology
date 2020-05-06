@@ -7,10 +7,11 @@ class PRNG:
                  gen : "PRNG used. Default is Geffe"=None, LFSR : "LFSR of choice" = None):
         # Default generator and default LFSR
         if gen  is None: gen  = self.Geffe
-        if LFSR is None: LFSR = Galois
+        if LFSR is None: LFSR = (Galois, Galois, Galois)
         # Make sure you give required number of initial vectors to registers
         # Also make sure lists containing these vectors are of the same length
-        assert len(tm) == len(iS) and len(tm) == gen.required_generators
+        # List of LFSR's must
+        assert len(tm) == len(iS) and len(tm) == len(LFSR) == gen.required_generators
         self.gen = gen
         self.iS  = iS
         self.tm  = tm
@@ -41,7 +42,7 @@ class PRNG:
     def get_generator(self):
         # Map into initial states into a list of 2-el tuple(s): (is_i, tm_i)
         lfsrs = tuple(zip(self.iS, self.tm))
-        lfsrs = [self.LFSR(state[0], state[1]) for state in lfsrs]
+        lfsrs = [self.LFSR[i](state[0], state[1]) for i,state in enumerate(lfsrs)]
         return self.gen(lfsrs=lfsrs)
     #
     # Implements shrinking generator

@@ -1,18 +1,18 @@
 # Cryptology
 Cryptology scripts from university 
 
-# lab1
+## lab1
 CBC padding oracle attack, implemented AES
 
 
-# lab2 
+## lab2 
 Shamir's secret sharing
 
 
-# lab3
+## lab3
 RSA implementation, known attacks on Plain RSA
 
-# lab4
+## lab4
 Pseudo-Random Number Generators. Using Linear Feedback Shift Registers
 (where output is a linear function of input)
 - Geffe
@@ -30,3 +30,8 @@ Implemented tests: FIPS 140-2
 - long runs test
 
 GUI Application created using PyQt 5
+
+## lab6
+Blockchain mechanism implementation with PoW
+Console application 
+
